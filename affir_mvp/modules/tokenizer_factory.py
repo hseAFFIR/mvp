@@ -11,5 +11,6 @@ class TokenizerFactory:
         if Strategy.BASIC <= strategy:
             pipeline.add_stage(filters.Splitter())
         if Strategy.FULL <= strategy:
+            pipeline.add_stage(filters.Punctuator())
             pipeline.add_stage(filters.Lowercaser())
         return pipeline
