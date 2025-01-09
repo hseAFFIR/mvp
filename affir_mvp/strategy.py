@@ -2,5 +2,5 @@ from enum import IntEnum
 
 
 class Strategy(IntEnum):
-    BASIC = 1
-    FULL = 2
+    LOW = 1
+    HIGH = 2
