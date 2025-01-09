@@ -9,7 +9,7 @@ class TokenizerFactory:
         pipeline = TokenizerPipeline()
 
         if Strategy.LOW <= strategy:
-            pipeline.add_stage(filters.Punctuator())
+            pipeline.add_filter(filters.Punctuator())
         if Strategy.HIGH <= strategy:
-            pipeline.add_stage(filters.Lowercaser())
+            pipeline.add_filter(filters.Lowercaser())
         return pipeline
