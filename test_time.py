@@ -2,8 +2,10 @@ import os
 import time
 import re
 
+# Через findall
+
 def count_word_in_folder(folder_path, target_word):
-    start_time = time.time()
+    total_time = 0
     total_count = 0
     
     # Создаем регулярное выражение для поиска целых слов
@@ -22,15 +24,20 @@ def count_word_in_folder(folder_path, target_word):
                 with open(file_path, "r", encoding="utf-8") as file:
                     content = file.read()
                     # Считаем количество вхождений целых слов
+
+                    start_time = time.time()
                     count = len(word_pattern.findall(content))
+                    end_time = time.time()
+                    total_time+=end_time - start_time
+
                    # print(f"В файле {filename} найдено {count} вхождений слова '{target_word}'.")
                     total_count += count
             except Exception as e:
                 print(f"Не удалось обработать файл {filename}: {e}")
 
-    end_time = time.time()
+    
     print(f"\nОбщее количество вхождений слова '{target_word}': {total_count}")
-    print(f"Время выполнения поиска: {end_time - start_time:.2f} секунд")
+    print(f"Время выполнения поиска: {total_time:.2f} секунд")
 
 # Пример использования
 folder_path = "data"  # Путь к папке
