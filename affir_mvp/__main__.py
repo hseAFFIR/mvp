@@ -1,3 +1,4 @@
+import affir_mvp.indexer as indexer
 from affir_mvp.modules.tokenizer_factory import TokenizerFactory
 from affir_mvp.strategy import Strategy
 
