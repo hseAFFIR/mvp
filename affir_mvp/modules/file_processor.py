@@ -1,11 +1,12 @@
 import os
 
 from affir_mvp.modules.tokenizer_factory import TokenizerFactory
+from affir_mvp.modules.tokenizer_pipeline import TokenizerPipeline
 from affir_mvp.strategy import Strategy
 
 
 class FileProcessor:
-    def __init__(self, folder_path: str, tokenizer):
+    def __init__(self, folder_path: str, tokenizer: TokenizerPipeline):
         """
         Класс для последовательной обработки файлов в указанной папке.
 
@@ -20,8 +21,6 @@ class FileProcessor:
     def process_files(self):
         """
         Обрабатывает каждый файл последовательно, передавая его содержимое в токенизатор.
-
-        :yield: Кортеж (ID файла, токены).
         """
         for file_name in self.files:
             file_id = f"{file_name}:{self.file_map[file_name]}"
@@ -29,5 +28,5 @@ class FileProcessor:
 
             with open(file_path, "r", encoding="utf-8") as file:
                 content = file.read()
-                tokens = self.tokenizer.run(content)  # Передаём содержимое в токенизатор
-                yield file_id, tokens  # Возвращаем ID файла и токены
+                self.tokenizer.set_file_id(file_id)
+                self.tokenizer.run(content)
