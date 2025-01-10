@@ -8,12 +8,11 @@ class TokenizerPipeline:
         self.filters = []
         self.file_id = None
 
-    def run(self, text: str) -> list[tuple[str, int]]:
+    def run(self, text: str, file_id: str = None) -> list[tuple[str, int]]:
+        if file_id:
+            self.file_id = file_id
         tokens = self._tokenize(text)
         return self.apply_filters(tokens)
-
-    def set_file_id(self, file_id: str):
-        self.file_id = file_id
 
     def _tokenize(self, text: str) -> list[tuple[str, int]]:
         tokens = []

@@ -5,7 +5,9 @@ from .tokenizer_pipeline import TokenizerPipeline
 
 
 class TokenizerFactory:
-    def create_pipeline(self, strategy: Strategy) -> TokenizerPipeline:
+
+    @staticmethod
+    def create_pipeline(strategy: Strategy) -> TokenizerPipeline:
         pipeline = TokenizerPipeline()
 
         if Strategy.LOW <= strategy:
