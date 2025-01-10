@@ -5,10 +5,17 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Python Debugger: Module",
+            "name": "AFFIR",
             "type": "debugpy",
             "request": "launch",
             "module": "affir_mvp",
+            // "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "name": "FORIC",
+            "type": "debugpy",
+            "request": "launch",
+            "module": "slow_search",
             // "envFile": "${workspaceFolder}/.env"
         }
     ]
