@@ -2,9 +2,9 @@ from .base import Base
 
 
 class Lowercaser(Base):
-
-    def process(self, tokens: list[str]) -> list[str]:
+    def process(self, tokens: list[tuple[str, int]]) -> list[tuple[str, int]]:
         res = []
-        for token in tokens:
-            res.append(token.lower())
+        for token, position in tokens:
+            res.append((token.lower(), position))
         return res
+
