@@ -1,5 +1,6 @@
 import os
 
+import affir_mvp.indexer as indexer
 from affir_mvp.modules.file_processor import FileProcessor
 from affir_mvp.modules.tokenizer_factory import TokenizerFactory
 from affir_mvp.strategy import Strategy
@@ -10,8 +11,5 @@ if __name__ == "__main__":
     factory = TokenizerFactory()
     tokenizer = factory.create_pipeline(Strategy.HIGH)
     processor = FileProcessor(folder_path, tokenizer)
-
-    # Вывод
-    for file_id, tokens in processor.process_files():
-        print(f"ID файла: {file_id}")
-        print(f"Токены: {tokens}")
+    processor.process_files()
+    print(indexer.get_token_info("семья"))

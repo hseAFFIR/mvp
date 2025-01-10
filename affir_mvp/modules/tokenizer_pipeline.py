@@ -1,13 +1,19 @@
+import affir_mvp.indexer as indexer
+
 from .filters.base import Base
 
 
 class TokenizerPipeline:
     def __init__(self):
         self.filters = []
+        self.file_id = None
 
     def run(self, text: str) -> list[tuple[str, int]]:
         tokens = self._tokenize(text)
         return self.apply_filters(tokens)
+
+    def set_file_id(self, file_id: str):
+        self.file_id = file_id
 
     def _tokenize(self, text: str) -> list[tuple[str, int]]:
         tokens = []
@@ -38,7 +44,10 @@ class TokenizerPipeline:
         self.filters.append(filter)
 
     def apply_filters(self, tokens: list[tuple[str, int]]) -> list[tuple[str, int]]:
-        for filter in self.filters:
-            filter: Base
-            tokens = filter.process(tokens)
+        for token, pos in tokens:
+            for filter in self.filters:
+                filter: Base
+                token = filter.process(token)
+            if self.file_id:
+                indexer.store_token(token, self.file_id, pos)
         return tokens
