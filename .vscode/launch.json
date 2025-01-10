@@ -5,17 +5,24 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "AFFIR",
+            "name": "affir",
             "type": "debugpy",
             "request": "launch",
             "module": "affir_mvp",
             // "envFile": "${workspaceFolder}/.env"
         },
         {
-            "name": "FORIC",
+            "name": "foric",
             "type": "debugpy",
             "request": "launch",
-            "module": "slow_search",
+            "module": "for_search",
+            // "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "name": "findall",
+            "type": "debugpy",
+            "request": "launch",
+            "module": "findall_search",
             // "envFile": "${workspaceFolder}/.env"
         }
     ]
