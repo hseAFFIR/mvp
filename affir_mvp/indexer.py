@@ -1,7 +1,7 @@
 TOKEN_STORAGE = dict()
 
 
-def storage_token(token: str, file_id: int, position: int):
+def store_token(token: str, file_id: int, position: int):
     if token not in TOKEN_STORAGE:
         TOKEN_STORAGE[token] = {}
     if file_id in TOKEN_STORAGE[token]:
