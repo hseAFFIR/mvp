@@ -5,10 +5,9 @@ class TokenizerPipeline:
     def __init__(self):
         self.filters = []
 
-    def run(self, text: str) -> list[str]:
+    def run(self, text: str) -> list[tuple[str, int]]:
         tokens = self._tokenize(text)
         return self.apply_filters(tokens)
-
 
     def _tokenize(self, text: str) -> list[tuple[str, int]]:
         tokens = []
@@ -34,12 +33,11 @@ class TokenizerPipeline:
                 tokens.append((token, start_position))
 
         return tokens
-  
 
     def add_filter(self, filter: Base):
         self.filters.append(filter)
 
-    def apply_filters(self, tokens: list[str]) -> list[str]:
+    def apply_filters(self, tokens: list[tuple[str, int]]) -> list[tuple[str, int]]:
         for filter in self.filters:
             filter: Base
             tokens = filter.process(tokens)
