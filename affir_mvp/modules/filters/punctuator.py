@@ -1,13 +1,10 @@
 from .base import Base
 
-
 class Punctuator(Base):
-    def process(self, tokens: list[str]) -> list[str]:
+    def process(self, tokens: list[tuple[str, int]]) -> list[tuple[str, int]]:
         res = []
-        for token in tokens:
-            new_token = ""
-            for ch in token:
-                if ch.isdigit() or ch.isalpha():
-                    new_token += ch
-            res.append(new_token)
+        for token, position in tokens:
+            new_token = "".join(ch for ch in token if ch.isalnum())
+            res.append((new_token, position))  
         return res
+
