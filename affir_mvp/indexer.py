@@ -1,3 +1,4 @@
+import pickle
 from typing import Dict, Optional, Set
 
 
@@ -30,3 +31,23 @@ class Indexer:
         если токен отсутствует.
         """
         return cls._storage.get(token)
+
+    @classmethod
+    def save_storage(cls, filepath: str):
+        try:
+            with open(filepath, "wb") as file:
+                pickle.dump(cls._storage, file)
+            print(f"Структура успешно сохранена в файл: {filepath}")
+        except Exception as e:
+            print(f"Ошибка при сохранении структуры в файл: {e}")
+            raise
+
+    @classmethod
+    def load_storage(cls, filepath: str):
+        try:
+            with open(filepath, "rb") as file:
+                cls._storage = pickle.load(file)
+            print(f"Структура успешно загружена из файла: {filepath}")
+        except Exception as e:
+            print(f"Ошибка при загрузке структуры из файла: {e}")
+            raise

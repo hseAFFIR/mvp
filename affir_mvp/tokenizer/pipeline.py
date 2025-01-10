@@ -43,10 +43,12 @@ class TokenizerPipeline:
         self.filters.append(filter)
 
     def apply_filters(self, tokens: list[tuple[str, int]]) -> list[tuple[str, int]]:
+        new_tokens = []
         for token, pos in tokens:
             for filter in self.filters:
                 filter: Base
                 token = filter.process(token)
+            new_tokens.append((token, pos))
             if self.file_id:
                 Indexer.store_token(token, self.file_id, pos)
-        return tokens
+        return new_tokens

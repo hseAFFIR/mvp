@@ -13,8 +13,7 @@ def search(string_for_search: str) -> Optional[Dict[int, Set[int]]]:
     :return: Результат поиска или None, если токен отсутствует.
     """
 
-    factory = TokenizerFactory()
-    tokenizer = factory.create_pipeline(Strategy.HIGH)
+    tokenizer = TokenizerFactory.create_pipeline(Strategy.HIGH)
 
     token_for_search = tokenizer.run(string_for_search)[0][0]  # пока ищем 1 слово
 
