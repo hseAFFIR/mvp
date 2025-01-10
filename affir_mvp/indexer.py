@@ -1,32 +1,32 @@
-import pickle
+from typing import Dict, Optional, Set
 
-global TOKEN_STORAGE
 
-TOKEN_STORAGE = dict()
+class Indexer:
+    # Хранилище токенов как атрибут класса
+    _storage: Dict[str, Dict[int, Set[int]]] = {}
 
-def store_token(token: str, file_id: int, position: int):
-    if token not in TOKEN_STORAGE:
-        TOKEN_STORAGE[token] = {}
-    if file_id in TOKEN_STORAGE[token]:
-        TOKEN_STORAGE[token][file_id].add(position)
-    else:
-        TOKEN_STORAGE[token][file_id] = {position}
+    @classmethod
+    def store_token(cls, token: str, file_id: int, position: int) -> None:
+        """
+        Добавляет токен в индекс.
 
-def get_token_info(token: str) -> dict | None:
-    return TOKEN_STORAGE.get(token)
+        :param token: Токен, который нужно сохранить.
+        :param file_id: Идентификатор файла, в котором находится токен.
+        :param position: Позиция токена в файле.
+        """
+        if token not in cls._storage:
+            cls._storage[token] = {}
+        if file_id not in cls._storage[token]:
+            cls._storage[token][file_id] = set()
+        cls._storage[token][file_id].add(position)
 
-def save_token_storage_to_file(filepath: str):
-    try:
-        with open(filepath, 'wb') as file:
-            pickle.dump(TOKEN_STORAGE, file)
-        print(f"Структура успешно сохранена в файл: {filepath}")
-    except Exception as e:
-        print(f"Ошибка при сохранении структуры в файл: {e}")
+    @classmethod
+    def get_token_info(cls, token: str) -> Optional[Dict[int, Set[int]]]:
+        """
+        Возвращает информацию о токене из индекса.
 
-def load_token_storage_from_file(filepath: str):
-    try:
-        with open(filepath, 'rb') as file:
-            TOKEN_STORAGE = pickle.load(file)
-        print(f"Структура успешно загружена из файла: {filepath}")
-    except Exception as e:
-        print(f"Ошибка при загрузке структуры из файла: {e}")
+        :param token: Токен, который нужно найти.
+        :return: Словарь с идентификаторами файлов и позициями токена или None,
+        если токен отсутствует.
+        """
+        return cls._storage.get(token)

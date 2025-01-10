@@ -1,7 +1,7 @@
 from affir_mvp.strategy import Strategy
 
 from . import filters
-from .tokenizer_pipeline import TokenizerPipeline
+from .pipeline import TokenizerPipeline
 
 
 class TokenizerFactory:

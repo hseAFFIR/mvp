@@ -1,4 +1,4 @@
-import affir_mvp.indexer as indexer
+from affir_mvp.indexer import Indexer
 
 from .filters.base import Base
 
@@ -48,5 +48,5 @@ class TokenizerPipeline:
                 filter: Base
                 token = filter.process(token)
             if self.file_id:
-                indexer.store_token(token, self.file_id, pos)
+                Indexer.store_token(token, self.file_id, pos)
         return tokens

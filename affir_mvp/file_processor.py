@@ -1,6 +1,6 @@
 from os import listdir, path
 
-from affir_mvp.modules.tokenizer_pipeline import TokenizerPipeline
+from affir_mvp.tokenizer import TokenizerPipeline
 
 
 class FileProcessor:
