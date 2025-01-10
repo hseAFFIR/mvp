@@ -1,8 +1,9 @@
 import os
 
-import affir_mvp.indexer as indexer
+from affir_mvp.indexer import Indexer
 from affir_mvp.modules.file_processor import FileProcessor
 from affir_mvp.modules.tokenizer_factory import TokenizerFactory
+from affir_mvp.search import search
 from affir_mvp.strategy import Strategy
 
 if __name__ == "__main__":
@@ -12,4 +13,5 @@ if __name__ == "__main__":
     tokenizer = factory.create_pipeline(Strategy.HIGH)
     processor = FileProcessor(folder_path, tokenizer)
     processor.process_files()
-    print(indexer.get_token_info("семья"))
+    # print(Indexer.get_token_info("семья"))
+    print(search("семья"))
