@@ -7,7 +7,7 @@ class Indexer:
     _storage: Dict[str, Dict[int, Set[int]]] = {}
 
     @classmethod
-    def store_token(cls, token: str, file_id: int, position: int) -> None:
+    def store_token(cls, token: str, file_id: int, position: int, word_position: int) -> None:
         """
         Добавляет токен в индекс.
 
@@ -19,7 +19,7 @@ class Indexer:
             cls._storage[token] = {}
         if file_id not in cls._storage[token]:
             cls._storage[token][file_id] = set()
-        cls._storage[token][file_id].add(position)
+        cls._storage[token][file_id].add((position, word_position))
 
     @classmethod
     def get_token_info(cls, token: str) -> Optional[Dict[int, Set[int]]]:
