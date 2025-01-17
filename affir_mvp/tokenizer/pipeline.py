@@ -56,7 +56,7 @@ class TokenizerPipeline:
             # Это слово
             else:
                 # Собираем символы токена
-                while current_position < len(text) and text[current_position].isalpha():
+                while current_position < len(text) and text[current_position].isalnum():
                     token += text[current_position]
                     current_position += 1
 
