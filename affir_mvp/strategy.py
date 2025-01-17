@@ -3,4 +3,5 @@ from enum import IntEnum
 
 class Strategy(IntEnum):
     LOW = 1
-    HIGH = 2
+    MEDIUM = 2
+    HIGH = 3
