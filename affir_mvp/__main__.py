@@ -22,5 +22,5 @@ if __name__ == "__main__":
     while True:
         word = input("Введите слово: ")
         start_time = time.time()
-        print(search(word, f.Lowercaser(), f.Htmler(), f.Punctuator()))
+        print(search(word, tokenizer))
         print(f"Выполнено за {(time.time() - start_time) * 1000} мс")

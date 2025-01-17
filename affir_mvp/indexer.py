@@ -22,7 +22,7 @@ class Indexer:
             cls._storage[token] = {}
         if file_id not in cls._storage[token]:
             cls._storage[token][file_id] = set()
-        cls._storage[token][file_id].add(token_data.pos)
+        cls._storage[token][file_id].add((token_data.pos, token_data.index))
 
     @classmethod
     def get_token_info(cls, token: str) -> Optional[Dict[int, Set[int]]]:
