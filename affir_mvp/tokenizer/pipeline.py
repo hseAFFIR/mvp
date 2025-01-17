@@ -4,15 +4,16 @@ from typing import Generator
 from affir_mvp.indexer import Indexer
 from affir_mvp.token import Token
 
-from .filters.base import Base
+from .filters import Base
 
 
 class TokenizerPipeline:
     html_pattern = re.compile(r"<\/?\w+.*?>")
     MAX_HTML_LEN = 10
 
-    def __init__(self):
-        self.filters = []
+    def __init__(self, *filters: Base):
+        self.filters: list[Base] = list(filters)
+        print(self.filters)
 
     def run(self, text: str, file_id: str = None) -> list[Token]:
         res = []
