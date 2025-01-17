@@ -1,11 +1,11 @@
 from typing import Dict, Optional, Set
 
 from affir_mvp.indexer import Indexer
-from affir_mvp.strategy import Strategy
-from affir_mvp.tokenizer import TokenizerFactory
+from affir_mvp.tokenizer import TokenizerPipeline
+from affir_mvp.tokenizer.filters import Base
 
 
-def search(string_for_search: str) -> Optional[Dict[int, Set[int]]]:
+def search(string_for_search: str, *filters: Base) -> Optional[Dict[int, Set[int]]]:
     """
     Осуществляет поиск по индексу для указанного токена.
 
@@ -13,8 +13,8 @@ def search(string_for_search: str) -> Optional[Dict[int, Set[int]]]:
     :return: Результат поиска или None, если токен отсутствует.
     """
 
-    tokenizer = TokenizerFactory.create_pipeline(Strategy.HIGH)
+    tokenizer = TokenizerPipeline(*filters)
 
-    token_for_search = tokenizer.run(string_for_search)[0][0]  # пока ищем 1 слово
+    token_for_search = tokenizer.run(string_for_search)[0].body  # пока ищем 1 слово
 
     return Indexer.get_token_info(token_for_search)
