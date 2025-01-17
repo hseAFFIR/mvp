@@ -1,13 +1,15 @@
 import pickle
 from typing import Dict, Optional, Set
 
+from affir_mvp.token import Token
+
 
 class Indexer:
     # Хранилище токенов как атрибут класса
     _storage: Dict[str, Dict[int, Set[int]]] = {}
 
     @classmethod
-    def store_token(cls, token: str, file_id: int, position: int, word_position: int) -> None:
+    def store_token(cls, token_data: Token, file_id: int) -> None:
         """
         Добавляет токен в индекс.
 
@@ -15,11 +17,12 @@ class Indexer:
         :param file_id: Идентификатор файла, в котором находится токен.
         :param position: Позиция токена в файле.
         """
+        token = token_data.body
         if token not in cls._storage:
             cls._storage[token] = {}
         if file_id not in cls._storage[token]:
             cls._storage[token][file_id] = set()
-        cls._storage[token][file_id].add((position, word_position))
+        cls._storage[token][file_id].add((token_data.pos, token_data.index))
 
     @classmethod
     def get_token_info(cls, token: str) -> Optional[Dict[int, Set[int]]]:

@@ -4,14 +4,13 @@ from os.path import dirname, join
 from affir_mvp.file_processor import FileProcessor
 from affir_mvp.indexer import Indexer
 from affir_mvp.search import search
-from affir_mvp.strategy import Strategy
-from affir_mvp.tokenizer import TokenizerFactory
+from affir_mvp.tokenizer import TokenizerPipeline
+from affir_mvp.tokenizer import filters as f
 
 if __name__ == "__main__":
     root_path = dirname(dirname(__file__))
     folder_path = join(root_path, "data")
-    factory = TokenizerFactory()
-    tokenizer = factory.create_pipeline(Strategy.HIGH)
+    tokenizer = TokenizerPipeline(f.Lowercaser(), f.Htmler(), f.Punctuator())
     try:
         Indexer.load_storage("storage.pkl")
     except Exception:
