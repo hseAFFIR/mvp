@@ -7,11 +7,13 @@ from affir_mvp.search import search
 from affir_mvp.strategy import Strategy
 from affir_mvp.tokenizer import TokenizerFactory
 
+strategy = Strategy.MEDIUM
+
 if __name__ == "__main__":
     root_path = dirname(dirname(__file__))
     folder_path = join(root_path, "data")
     factory = TokenizerFactory()
-    tokenizer = factory.create_pipeline(Strategy.HIGH)
+    tokenizer = factory.create_pipeline(strategy)
     try:
         Indexer.load_storage("storage.pkl")
     except Exception:
@@ -23,5 +25,5 @@ if __name__ == "__main__":
     while True:
         word = input("Введите слово: ")
         start_time = time.time()
-        print(search(word))
+        print(search(word, strategy))
         print(f"Выполнено за {(time.time() - start_time) * 1000} мс")
