@@ -45,7 +45,7 @@ class TokenizerPipeline:
                 if res and res.start() == start_position:
                     token = res.group()
                     current_position = res.end()
-                # Да, это yt html тег
+                # Нет, это не html тег
                 else:
                     token = text[start_position]
                     current_position += 1
