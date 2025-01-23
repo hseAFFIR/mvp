@@ -1,3 +1,3 @@
 class RussianStemmer:
-    def russian_ste(self, token):
+    def russian_stemmer(self, token):
         return token
