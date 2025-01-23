@@ -5,7 +5,7 @@
 """
 import re
 
-class Stemmer:
+class EnglishStemmer:
     def __init__(self):
         # Define vowels, english_doubles, valid li-endings and exceptions
         self.english_vowels = 'aeiouy'
