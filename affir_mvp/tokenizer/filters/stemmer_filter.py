@@ -1,12 +1,12 @@
 import re
 from .base import Base
 from .stemmer_eng import EnglishStemmer
-from .stemmer_ru import RussianStemmer
+from .stemmer_ru import RussianPorterStemmer
 
 class StemFilter(Base):
     def __init__(self):
         self.english_stemmer = EnglishStemmer()  
-        self.russian_stemmer = RussianStemmer()  
+        self.russian_stemmer = RussianPorterStemmer()  
 
     def detect_language(self, token):
         # Проверяем на наличие кириллицы
