@@ -1,0 +1,7 @@
+<html>
+    <head><title>Test Page</title></head>
+    <body>
+        <h1>HTML is fun!</h1>
+        <p>Another example with HTML content.</p>
+    </body>
+</html>

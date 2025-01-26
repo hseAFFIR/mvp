@@ -1,0 +1,7 @@
+<html>
+    <body>
+        <div>Welcome to the world of HTML!</div>
+        <img src="path/folder/lib/png.zip">
+        <p>This is a simple file.</p>
+    </body>
+</html>
