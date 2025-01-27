@@ -10,7 +10,9 @@ from affir_mvp.tokenizer import filters as f
 if __name__ == "__main__":
     root_path = dirname(dirname(__file__))
     folder_path = join(root_path, "data")
-    tokenizer = TokenizerPipeline(f.Lowercaser(), f.Htmler(), f.Punctuator(), f.StemFilter())
+    tokenizer = TokenizerPipeline(
+        f.Lowercaser(), f.Htmler(), f.Punctuator(), f.StopWords(), f.StemFilter()
+    )
     try:
         Indexer.load_storage("storage.pkl")
     except Exception:
