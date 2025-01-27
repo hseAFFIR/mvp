@@ -1,14 +1,18 @@
 import os
+import re
 import time
 from os.path import dirname, join
 
 
-# побуквенный поиск
+# finditer поиск
 def count_word_in_folder(folder_path, target_word):
     total_count = 0
     word_positions = {}
 
-    target_word_lower = target_word.lower()
+    # Создаем регулярное выражение для поиска целых слов
+    word_pattern = re.compile(
+        rf"\b{re.escape(target_word)}\b", re.IGNORECASE
+    )  # Игнорируем регистр, если нужно
 
     # Проверяем, что папка существует
     if not os.path.exists(folder_path):
@@ -22,30 +26,15 @@ def count_word_in_folder(folder_path, target_word):
             try:
                 with open(file_path, "r", encoding="utf-8") as file:
                     content = file.read()
-                    count = 0
-                    positions = set()
 
-                    # Перебираем символы текста вручную
-                    word = ""
-                    for index, char in enumerate(content):
-                        if (
-                            char.isalnum()
-                        ):  # Если символ буква или цифра, добавляем в текущее слово
-                            word += char.lower()
-                        else:
-                            if word == target_word_lower:  # Проверяем, совпадает ли слово
-                                count += 1
-                                positions.add(index - len(word))  # Добавляем позицию начала слова
-                            word = ""  # Сбрасываем текущее слово
+                    # Считаем только вхождения токена, без записи позиций
+                    matches = list(word_pattern.finditer(content))  # Найденные вхождения
 
-                    # Последнее слово (если текст не завершился разделителем)
-                    if word == target_word_lower:
-                        count += 1
-                        positions.add(len(content) - len(word))  # Последняя позиция слова
-
-                    total_count += count
-
-                    if positions:  # Если были найдены позиции
+                    if matches:
+                        positions = {
+                            match.start() for match in matches
+                        }  # Индексы начала каждого совпадения
+                        total_count += len(matches)
                         file_id = filename.split(".")[0]  # Можно использовать имя файла как id
                         word_positions[file_id] = positions
 
