@@ -411,35 +411,3 @@ class RussianPorterStemmer:
                 word = word[: -len(ending)]
                 return word
         return word
-
-    # для проверки с оригинальным портером с сайта (https://snowballstem.org/demo.html#Russian)
-    def russian_compare_files(self, voc_file, output_file):
-        with open(voc_file, "r", encoding="utf-8") as voc:
-            voc_words = [line.strip() for line in voc]
-        print(f"Number of words: {len(voc_words)}")
-        with open(output_file, "r", encoding="utf-8") as out:
-            output_words = [line.strip() for line in out]
-
-        mismatched_count = 0
-        for voc_word, output_word in zip(voc_words, output_words):
-            voc_word = voc_word.replace("ё", "е")
-            output_word = output_word.replace("ё", "е")
-
-            if voc_word in self.stop_words:
-                continue
-            stemmed_word = self.russian_stemmer(voc_word)
-            if stemmed_word != output_word:
-                print(f"{voc_word} -> {stemmed_word} does not match {output_word}")
-                mismatched_count += 1
-
-        return mismatched_count
-
-
-# Example usage
-# if __name__ == "__main__":
-#     stemmer = RussianPorterStemmer()
-#     voc_file = "voc.txt"
-#     output_file = "output.txt"
-#     mismatched_count = stemmer.russian_compare_files(voc_file, output_file)
-#     print(f"Number of mismatched words: {mismatched_count}")
-#     print(stemmer.russian_stemmer("сказанный"))
