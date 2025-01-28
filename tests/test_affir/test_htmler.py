@@ -36,26 +36,26 @@ def test_tokenizer_with_htmler(word, expected_output):
         (
             "HTML",
             {
-                "file1.txt:2": {55},
-                "file2.txt:1": {72, 122},
+                "file1.txt": {55},
+                "file2.txt": {72, 122},
             },
         ),
         (
             "example",
             {
-                "file2.txt:1": {109},
+                "file2.txt": {109},
             },
         ),
         (
             "simple",
             {
-                "file1.txt:2": {132},
+                "file1.txt": {132},
             },
         ),
         (
             '<img src="path/folder/lib/png.zip">',
             {
-                "file1.txt:2": {75},
+                "file1.txt": {75},
             },
         ),
         (

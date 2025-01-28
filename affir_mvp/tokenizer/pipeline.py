@@ -20,8 +20,6 @@ class TokenizerPipeline:
         for token in self._tokenize(text):
             if file_id:
                 Indexer.store_token(token, file_id)
-            else:
-                print(token, end="\n")
             res.append(token)
         return res
 
