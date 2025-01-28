@@ -580,3 +580,4 @@ $RECYCLE.BIN/
 
 tests/tests_data/big_dataset/
 
+.DS_Store
