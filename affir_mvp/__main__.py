@@ -9,18 +9,15 @@ from affir_mvp.tokenizer import filters as f
 
 if __name__ == "__main__":
     root_path = dirname(dirname(__file__))
-    folder_path = join(root_path, "data")
+    data_folder = join(root_path, "data")
+    index_folder = join(root_path, "index")
     tokenizer = TokenizerPipeline(
         f.Lowercaser(), f.Htmler(), f.Punctuator(), f.StopWords(), f.StemFilter()
     )
-    try:
-        Indexer.load_storage("storage.pkl")
-    except Exception:
-        print("Кеш отсутствует. Загружаем...")
-        processor = FileProcessor(folder_path)
-        processor.process_files(tokenizer)
-        Indexer.save_storage("storage.pkl")
-
+    Indexer._load_refs()
+    processor = FileProcessor(data_folder, index_folder)
+    processor.process_files(tokenizer)  # Запускаем обработку файлов
+    Indexer.finalize()
     while True:
         word = input("Введите слово: ")
         start_time = time.time()
