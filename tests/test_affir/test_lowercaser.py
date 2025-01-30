@@ -1,5 +1,14 @@
+import pytest
+
+from affir_mvp.indexer import Indexer
 from affir_mvp.tokenizer.filters import Htmler, Lowercaser
 from affir_mvp.tokenizer.pipeline import TokenizerPipeline
+
+
+@pytest.fixture(autouse=True)
+def clear_storage():
+    """Перед каждым тестом очищаем индекс."""
+    Indexer._storage = {}
 
 
 # Тест без фильтра на приведение к нижнему регистру

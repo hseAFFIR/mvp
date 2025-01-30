@@ -3,9 +3,16 @@ from os.path import dirname, join
 import pytest
 
 from affir_mvp.file_processor import FileProcessor
+from affir_mvp.indexer import Indexer
 from affir_mvp.search import search
 from affir_mvp.tokenizer.filters import Htmler
 from affir_mvp.tokenizer.pipeline import TokenizerPipeline
+
+
+@pytest.fixture(autouse=True)
+def clear_storage():
+    """Перед каждым тестом очищаем индекс."""
+    Indexer._storage = {}
 
 
 # Тест без фильтра Htmler

@@ -2,8 +2,15 @@ from os.path import dirname, join
 
 import pytest
 
+from affir_mvp.indexer import Indexer
 from affir_mvp.tokenizer import TokenizerPipeline
 from affir_mvp.tokenizer.filters import StopWords
+
+
+@pytest.fixture(autouse=True)
+def clear_storage():
+    """Перед каждым тестом очищаем индекс."""
+    Indexer._storage = {}
 
 
 def parse_stop_words(file_path):
