@@ -5,7 +5,13 @@ import pytest
 from memory_profiler import memory_usage
 
 from affir_mvp.file_processor import FileProcessor
-from affir_mvp.tokenizer.filters import Htmler, Lowercaser, Punctuator, StemFilter
+from affir_mvp.tokenizer.filters import (
+    Htmler,
+    Lowercaser,
+    Punctuator,
+    StemFilter,
+    StopWords,
+)
 from affir_mvp.tokenizer.pipeline import TokenizerPipeline
 
 
@@ -16,8 +22,9 @@ from affir_mvp.tokenizer.pipeline import TokenizerPipeline
         ([Htmler()], 7, 250),
         ([Punctuator()], 6, 250),
         ([StemFilter()], 8, 250),
+        ([StopWords()], 8, 250),
         (
-            [Lowercaser(), Htmler(), Punctuator(), StemFilter()],
+            [Lowercaser(), Htmler(), Punctuator(), StopWords(), StemFilter()],
             10,
             250,
         ),
