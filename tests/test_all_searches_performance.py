@@ -64,6 +64,7 @@ def setup():
 поэтому пока удивлялся чужим успехам.",
             {"prisel_ci-i-sokroviha-piratov.txt": {2912}},
         ),
+        ('"Я ни каким образом не предполагал что эти два', {"admiral-_koronat_.txt": {346039}}),
     ],
 )
 def test_all_searches_performance(word, expected_results):
