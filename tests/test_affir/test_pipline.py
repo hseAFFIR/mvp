@@ -21,12 +21,12 @@ from affir_mvp.tokenizer.pipeline import TokenizerPipeline
     [
         ([Lowercaser()], 5, 250),
         ([Htmler()], 7, 250),
-        ([Punctuator()], 6, 250),
-        ([StemFilter()], 10, 250),
+        ([Punctuator()], 8, 250),
+        ([StemFilter()], 25, 250),
         ([StopWords()], 8, 250),
         (
             [Lowercaser(), Htmler(), Punctuator(), StopWords(), StemFilter()],
-            10,
+            25,
             250,
         ),
     ],
