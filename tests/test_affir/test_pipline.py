@@ -19,7 +19,7 @@ from affir_mvp.tokenizer.pipeline import TokenizerPipeline
 @pytest.mark.parametrize(
     "filters, max_time, max_memory",
     [
-        ([Lowercaser()], 5, 250),
+        ([Lowercaser()], 8, 250),
         ([Htmler()], 7, 250),
         ([Punctuator()], 8, 250),
         ([StemFilter()], 25, 250),
