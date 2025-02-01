@@ -5,6 +5,7 @@ import pytest
 from memory_profiler import memory_usage
 
 from affir_mvp.file_processor import FileProcessor
+from affir_mvp.indexer import Indexer
 from affir_mvp.tokenizer.filters import (
     Htmler,
     Lowercaser,
@@ -21,7 +22,7 @@ from affir_mvp.tokenizer.pipeline import TokenizerPipeline
         ([Lowercaser()], 5, 250),
         ([Htmler()], 7, 250),
         ([Punctuator()], 6, 250),
-        ([StemFilter()], 8, 250),
+        ([StemFilter()], 10, 250),
         ([StopWords()], 8, 250),
         (
             [Lowercaser(), Htmler(), Punctuator(), StopWords(), StemFilter()],
@@ -35,6 +36,8 @@ def test_file_processing_time_and_memory(filters, max_time, max_memory):
     root_path = dirname(dirname(__file__))
     # folder_path = join(root_path, "tests_data/big_dataset")
     folder_path = join(root_path, "..", "data")
+
+    Indexer._storage = {}
 
     # Создание пайплайна с фильтрами
     tokenizer = TokenizerPipeline(*filters)

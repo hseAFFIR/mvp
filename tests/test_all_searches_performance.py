@@ -5,16 +5,12 @@ import pytest
 
 import tester.searches as s
 from affir_mvp.file_processor import FileProcessor
+from affir_mvp.indexer import Indexer
 from affir_mvp.search import search
 from affir_mvp.tokenizer import TokenizerPipeline
 
 root_path = dirname(dirname(__file__))
 folder_path = join(root_path, "data")
-
-# Создаем экземпляр токенизатора и процессора
-tokenizer = TokenizerPipeline()
-processor = FileProcessor(folder_path)
-processor.process_files(tokenizer)
 
 
 @pytest.mark.parametrize(
@@ -61,6 +57,11 @@ processor.process_files(tokenizer)
     ],
 )
 def test_all_searches_performance(word, expected_results):
+    # Создаем экземпляр токенизатора и процессора
+    Indexer._storage = {}
+    tokenizer = TokenizerPipeline()
+    processor = FileProcessor(folder_path)
+    processor.process_files(tokenizer)
 
     # Запуск поиска с использованием affir
     start_time = time.time()
