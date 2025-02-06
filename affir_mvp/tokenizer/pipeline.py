@@ -13,7 +13,6 @@ class TokenizerPipeline:
 
     def __init__(self, *filters: Base):
         self.filters: list[Base] = list(filters)
-        print(self.filters)
 
     def run(self, text: str, file_id: str = None) -> list[Token]:
         res = []
