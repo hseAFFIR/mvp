@@ -3,7 +3,7 @@ from os.path import dirname, join
 
 import pytest
 
-import tester.searches as s
+import primitive.searches as s
 from affir_mvp.file_processor import FileProcessor
 from affir_mvp.indexer import Indexer
 from affir_mvp.search import search

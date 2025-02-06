@@ -12,17 +12,10 @@
             // "envFile": "${workspaceFolder}/.env"
         },
         {
-            "name": "foric",
+            "name": "primitive",
             "type": "debugpy",
             "request": "launch",
-            "module": "for_search",
-            // "envFile": "${workspaceFolder}/.env"
-        },
-        {
-            "name": "findall",
-            "type": "debugpy",
-            "request": "launch",
-            "module": "findall_search",
+            "module": "primitive",
             // "envFile": "${workspaceFolder}/.env"
         }
     ]
