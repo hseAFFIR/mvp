@@ -226,3 +226,6 @@ may
 must
 might
 ought
+would
+should
+could

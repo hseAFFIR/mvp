@@ -19,7 +19,7 @@ class FileProcessor:
         Обрабатывает каждый файл последовательно, передавая его содержимое в токенизатор.
         """
         for file_name in self.files:
-            file_id = f"{file_name}:{self.file_map[file_name]}"
+            file_id = f"{file_name}"
             file_path = path.join(self.folder_path, file_name)
 
             with open(file_path, "r", encoding="utf-8") as file:

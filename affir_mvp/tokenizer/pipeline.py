@@ -13,15 +13,12 @@ class TokenizerPipeline:
 
     def __init__(self, *filters: Base):
         self.filters: list[Base] = list(filters)
-        print(self.filters)
 
     def run(self, text: str, file_id: str = None) -> list[Token]:
         res = []
         for token in self._tokenize(text):
             if file_id:
                 Indexer.store_token(token, file_id)
-            else:
-                print(token, end="\n")
             res.append(token)
         return res
 
